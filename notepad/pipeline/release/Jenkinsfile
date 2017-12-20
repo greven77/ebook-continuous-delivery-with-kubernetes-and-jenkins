@@ -1,7 +1,7 @@
 podTemplate(label: 'release', 
   containers: [
-    containerTemplate(name: 'kubectl', image: 'jorgeacetozi/kubectl:1.7.0', ttyEnabled: true, command: 'cat'),
-    containerTemplate(name: 'maven', image: 'jorgeacetozi/maven:3.5.0-jdk-8-alpine', ttyEnabled: true, command: 'cat'),
+    containerTemplate(name: 'kubectl', image: 'greven77/kubectl:1.7.0', ttyEnabled: true, command: 'cat'),
+    containerTemplate(name: 'maven', image: 'greven77/maven:3.5.0-jdk-8-alpine', ttyEnabled: true, command: 'cat'),
     containerTemplate(name: 'docker', image: 'docker', ttyEnabled: true, command: 'cat')
   ],
   volumes: [
@@ -34,9 +34,9 @@ podTemplate(label: 'release',
           cp /home/jenkins/.ssh/id_rsa /root/.ssh/id_rsa
           chmod 400 /root/.ssh/id_rsa
           ssh-keyscan -t rsa github.com >> /root/.ssh/known_hosts
-          git clone git@github.com:jorgeacetozi/notepad.git
+          git clone git@github.com:greven77/notepad.git
           cd notepad
-          git config --global user.email "jenkins@jorgeacetozi.com"
+          git config --global user.email "jenkins@greven77.com"
           git config --global user.name "Jenkins"
           mvn -B -s /etc/maven/settings.xml release:prepare "-DreleaseVersion=${RELEASE_VERSION}" "-DdevelopmentVersion=${NEW_VERSION}" release:perform -Darguments="-DskipTests"
         """
